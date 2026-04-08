@@ -32,10 +32,37 @@
       font-size: 28px;
     }
 
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
     nav a {
-      margin-left: 20px;
       text-decoration: none;
       color: #2a75bb;
+      font-weight: bold;
+    }
+
+    .cart-icon {
+      position: relative;
+      cursor: pointer;
+      font-size: 24px;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: red;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
       font-weight: bold;
     }
 
@@ -116,6 +143,150 @@
       font-size: 18px;
       font-weight: bold;
       color: green;
+      margin-bottom: 15px;
+    }
+
+    .card-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .add-to-cart {
+      flex: 1;
+      background: #2a75bb;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .add-to-cart:hover {
+      background: #1e5a8e;
+    }
+
+    .quantity-input {
+      width: 60px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+      background-color: white;
+      margin: 10% auto;
+      padding: 30px;
+      border-radius: 14px;
+      width: 90%;
+      max-width: 500px;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: #000;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+      gap: 10px;
+    }
+
+    .cart-item-info {
+      flex: 1;
+      text-align: left;
+    }
+
+    .cart-item-name {
+      font-weight: bold;
+      color: #2a75bb;
+    }
+
+    .cart-item-price {
+      color: green;
+      font-size: 14px;
+    }
+
+    .remove-btn {
+      background: red;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .cart-summary {
+      padding: 20px;
+      background: #f5f5f5;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    .cart-total {
+      font-size: 20px;
+      font-weight: bold;
+      color: #2a75bb;
+      text-align: right;
+      margin-top: 10px;
+    }
+
+    .whatsapp-btn {
+      width: 100%;
+      background: #25d366;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 15px;
+      transition: background 0.3s;
+    }
+
+    .whatsapp-btn:hover {
+      background: #1ea952;
+    }
+
+    .whatsapp-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    .empty-cart {
+      text-align: center;
+      padding: 40px;
+      color: #999;
     }
 
     .about, .contact {
@@ -163,12 +334,22 @@
         gap: 10px;
       }
 
+      nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+
       nav a {
-        margin: 0 10px;
+        margin: 0;
       }
 
       .hero h2 {
         font-size: 30px;
+      }
+
+      .modal-content {
+        width: 95%;
+        margin: 30% auto;
       }
     }
   </style>
@@ -182,6 +363,10 @@
       <a href="#products">Products</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
+      <div class="cart-icon" onclick="openCart()">
+        🛒
+        <span class="cart-count" id="cartCount">0</span>
+      </div>
     </nav>
   </header>
 
@@ -195,77 +380,8 @@
 
   <section class="section" id="products">
     <h3>Available Pokemon Sets!</h3>
-    <div class="products">
-      <div class="card">
-        <img src="MegaEvoSleeved.jpg" alt="Booster Pack">
-        <h4>Sleeved Booster Packs</h4>
-        <p>Mega Evolution Sleeved Booster Packs</p>
-        <div class="price">Nu. 1250</div>
-      </div>
-
-      <div class="card">
-        <img src="Perfect Order Sleeved.jpg" alt="Booster Pack">
-        <h4>Sleeved Booster Packs</h4>
-        <p>Perfect Order Sleeved Booster Packs</p>
-        <div class="price">Coming Soon!</div>
-      </div>
-
-      <div class="card">
-        <img src="Twilight Masquerade Sleeved.jpg" alt="Booster Pack">
-        <h4>Sleeved Booster Packs</h4>
-        <p>Twilight Masquerade Sleeved Booster Packs</p>
-        <div class="price">Coming Soon!</div>
-      </div>
-
-      <div class="card">
-        <img src="Destined Rivals Sleeved.webp" alt="Booster Pack">
-        <h4>Sleeved Booster Packs</h4>
-        <p>Destined Rivals Sleeved Booster Packs</p>
-        <div class="price">Coming Soon!</div>
-      </div>
-            
-      <div class="card">
-        <img src="Mega Evo Bundle.jpg" alt="Booster Bundle">
-        <h4>Booster Bundle</h4>
-        <p>Mega Evolution Booster Bundle</p>
-        <div class="price">Nu. 7k</div>
-      </div>
-
-      <div class="card">
-        <img src="Prismatic Evolutions ETB.webp" alt="ETB">
-        <h4>Elite Trainer Boxes</h4>
-        <p>Prismatic Evolutions ETB</p>
-        <div class="price">Nu. 28.8k</div>
-      </div>
-      
-      <div class="card">
-        <img src="Destined Rivals ETB.webp" alt="ETB">
-        <h4>Elite Trainer Boxes</h4>
-        <p>Destined Rivals ETB</p>
-        <div class="price">Nu. 30.2k</div>
-      </div>
-      
-      <div class="card">
-        <img src="Perfect Order ETB.jpg" alt="ETB">
-        <h4>Elite Trainer Boxes</h4>
-        <p>Perfect Order ETBs</p>
-        <div class="price">Coming Soon!</div>
-      </div>
-      
-       <div class="card">
-        <img src="Temporal Forces ETB.jpg" alt="ETB">
-        <h4>Elite Trainer Boxes</h4>
-        <p>Temporal Forces ETB</p>
-        <div class="price">Coming Soon!</div>
-      </div>
-
-      <div class="card">
-        <img src="Stellar Crown ETB.jpg" alt="ETB">
-        <h4>Elite Trainer Boxes</h4>
-        <p>Stellar Crown Pokemon Center ETB</p>
-        <div class="price">Coming Soon!</div>
-      </div>
-
+    <div class="products" id="productsContainer">
+      <!-- Products will be generated by JavaScript -->
     </div>
   </section>
 
@@ -274,7 +390,7 @@
     <div class="about">
       <p>
         Pokemart BT is an online business based in Thimphu for Pokémon fans and card collectors.
-        We have authentic Pokemon trading cards that are imported from USA. We also have accessories like sleeves to protect your purchases. The business was started to support my addiction of buying cards and I would be thrilled to share this obession with the rest of Thimphu community! 
+        We have authentic Pokemon trading cards that are imported from USA. We also have accessories like sleeves to protect your purchases. The business was started to support my addiction of buying [...]
       </p>
     </div>
   </section>
@@ -294,6 +410,227 @@
   <footer>
     <p>© 2026 Pokemart BT | All Rights Reserved</p>
   </footer>
+
+  <!-- Cart Modal -->
+  <div id="cartModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeCart()">&times;</span>
+      <h2>Shopping Cart</h2>
+      <div id="cartItems"></div>
+      <div class="cart-summary">
+        <div class="cart-total">Total: <span id="cartTotalAmount">Nu. 0</span></div>
+      </div>
+      <button class="whatsapp-btn" onclick="sendToWhatsApp()" id="whatsappBtn">
+        📱 Send Order to WhatsApp
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Product data
+    const products = [
+      {
+        id: 1,
+        name: "Sleeved Booster Packs - Mega Evolution",
+        image: "MegaEvoSleeved.jpg",
+        price: 1250,
+        available: true
+      },
+      {
+        id: 2,
+        name: "Sleeved Booster Packs - Perfect Order",
+        image: "Perfect Order Sleeved.jpg",
+        price: 0,
+        available: false
+      },
+      {
+        id: 3,
+        name: "Sleeved Booster Packs - Twilight Masquerade",
+        image: "Twilight Masquerade Sleeved.jpg",
+        price: 0,
+        available: false
+      },
+      {
+        id: 4,
+        name: "Sleeved Booster Packs - Destined Rivals",
+        image: "Destined Rivals Sleeved.webp",
+        price: 0,
+        available: false
+      },
+      {
+        id: 5,
+        name: "Booster Bundle - Mega Evolution",
+        image: "Mega Evo Bundle.jpg",
+        price: 7000,
+        available: true
+      },
+      {
+        id: 6,
+        name: "Elite Trainer Boxes - Prismatic Evolutions",
+        image: "Prismatic Evolutions ETB.webp",
+        price: 28800,
+        available: true
+      },
+      {
+        id: 7,
+        name: "Elite Trainer Boxes - Destined Rivals",
+        image: "Destined Rivals ETB.webp",
+        price: 30200,
+        available: true
+      },
+      {
+        id: 8,
+        name: "Elite Trainer Boxes - Perfect Order",
+        image: "Perfect Order ETB.jpg",
+        price: 0,
+        available: false
+      },
+      {
+        id: 9,
+        name: "Elite Trainer Boxes - Temporal Forces",
+        image: "Temporal Forces ETB.jpg",
+        price: 0,
+        available: false
+      },
+      {
+        id: 10,
+        name: "Elite Trainer Boxes - Stellar Crown",
+        image: "Stellar Crown ETB.jpg",
+        price: 0,
+        available: false
+      }
+    ];
+
+    let cart = JSON.parse(localStorage.getItem('pokemartCart')) || [];
+
+    // Initialize products on page load
+    function initializeProducts() {
+      const container = document.getElementById('productsContainer');
+      container.innerHTML = products.map(product => `
+        <div class="card">
+          <img src="${product.image}" alt="${product.name}">
+          <h4>${product.name}</h4>
+          <div class="price">${product.available ? `Nu. ${product.price}` : 'Coming Soon!'}</div>
+          ${product.available ? `
+            <div class="card-buttons">
+              <input type="number" class="quantity-input" id="qty-${product.id}" value="1" min="1" max="10">
+              <button class="add-to-cart" onclick="addToCart(${product.id}, parseInt(document.getElementById('qty-${product.id}').value))">
+                Add to Cart
+              </button>
+            </div>
+          ` : '<button class="add-to-cart" disabled>Coming Soon</button>'}
+        </div>
+      `).join('');
+    }
+
+    function addToCart(productId, quantity) {
+      const product = products.find(p => p.id === productId);
+      const existingItem = cart.find(item => item.id === productId);
+
+      if (existingItem) {
+        existingItem.quantity += quantity;
+      } else {
+        cart.push({
+          id: productId,
+          name: product.name,
+          price: product.price,
+          quantity: quantity
+        });
+      }
+
+      saveCart();
+      updateCartCount();
+      alert(`${product.name} added to cart!`);
+    }
+
+    function removeFromCart(productId) {
+      cart = cart.filter(item => item.id !== productId);
+      saveCart();
+      updateCartCount();
+      displayCart();
+    }
+
+    function saveCart() {
+      localStorage.setItem('pokemartCart', JSON.stringify(cart));
+    }
+
+    function updateCartCount() {
+      const count = cart.reduce((total, item) => total + item.quantity, 0);
+      document.getElementById('cartCount').textContent = count;
+    }
+
+    function openCart() {
+      document.getElementById('cartModal').style.display = 'block';
+      displayCart();
+    }
+
+    function closeCart() {
+      document.getElementById('cartModal').style.display = 'none';
+    }
+
+    function displayCart() {
+      const cartItemsDiv = document.getElementById('cartItems');
+      const whatsappBtn = document.getElementById('whatsappBtn');
+
+      if (cart.length === 0) {
+        cartItemsDiv.innerHTML = '<div class="empty-cart">Your cart is empty</div>';
+        whatsappBtn.disabled = true;
+      } else {
+        cartItemsDiv.innerHTML = cart.map(item => `
+          <div class="cart-item">
+            <div class="cart-item-info">
+              <div class="cart-item-name">${item.name}</div>
+              <div class="cart-item-price">Nu. ${item.price} × ${item.quantity}</div>
+            </div>
+            <button class="remove-btn" onclick="removeFromCart(${item.id})">Remove</button>
+          </div>
+        `).join('');
+        whatsappBtn.disabled = false;
+      }
+
+      const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      document.getElementById('cartTotalAmount').textContent = `Nu. ${total}`;
+    }
+
+    function sendToWhatsApp() {
+      if (cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+      }
+
+      let message = '📦 *Pokemart BT Order*\n\n';
+      let total = 0;
+
+      cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        message += `• ${item.name}\n  Qty: ${item.quantity} × Nu. ${item.price} = Nu. ${itemTotal}\n\n`;
+      });
+
+      message += `━━━━━━━━━━━━━━━━\n*Total: Nu. ${total}*\n\nPlease confirm this order.`;
+
+      // Replace with your WhatsApp number (format: country code + number, no spaces or +)
+      const whatsappNumber = '97517778899'; // Example number
+      const encodedMessage = encodeURIComponent(message);
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+      window.open(whatsappUrl, '_blank');
+    }
+
+    // Close modal when clicking outside of it
+    window.onclick = function(event) {
+      const modal = document.getElementById('cartModal');
+      if (event.target == modal) {
+        modal.style.display = 'none';
+      }
+    }
+
+    // Initialize on page load
+    window.addEventListener('load', () => {
+      initializeProducts();
+      updateCartCount();
+    });
+  </script>
 
 </body>
 </html>
